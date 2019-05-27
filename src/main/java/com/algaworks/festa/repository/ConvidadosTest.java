@@ -27,6 +27,7 @@ public class ConvidadosTest {
         // given
         Convidado teste = new Convidado("teste");
         entityManager.persist(teste);
+        //entityManager.persistAndGetId();
         entityManager.flush();
 
         // when
