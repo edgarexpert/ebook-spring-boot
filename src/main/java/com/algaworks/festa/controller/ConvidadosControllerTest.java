@@ -14,13 +14,18 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
+//@RunWith(MockitoJUnitRunner.class)
+
+//@SpringBootTest
 @WebMvcTest(ConvidadosController.class)
 public class ConvidadosControllerTest {
+
 
     @Autowired
     private MockMvc mvc;
@@ -37,13 +42,13 @@ public class ConvidadosControllerTest {
 
         List<Convidado> allConvidados = Arrays.asList(teste);
 
-        //given(service.listar()).willReturn(allConvidados);
+        //BDDMockito.given(service.listar()).willReturn(allConvidados);
 
-        mvc.perform(get("/api/convidados")
+        mvc.perform(get("/convidados")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
-                //.andExpect(jsonPath("$[0].nome", is(teste.getNome())))
+                .andExpect(jsonPath("$[0].nome", is(teste.getNome())))
         ;
     }
 }
